@@ -22,11 +22,11 @@ FONT
 p, 
 li, 
 a {
-    font-size: 20px;
+    font-size: 1rem;
 }
 
 h2 {
-    font-size: 30px;
+    font-size: 1.8rem;
     font-weight: bold;
 }
 
