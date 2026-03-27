@@ -1,158 +1,342 @@
-<!-- {% extends 'layout.html' %}
-
-{% block content %}
-<section class="header">
-          <h1>Victor</h1>
-          <p>Backend Engineer specializing in Django APIs, scalable systems, and exploring AI with Python</p>
-          I would suggest choosing a different picture here.
-          Like maybe a hobby photo
-          <img src="../static/images/IMG_20200927_080359.jpg" alt="Headshot of myself">
-      </section>
-      <section id="about-page">
-          <div id="triangle7"></div>
-          <div id="triangle8"></div>
-          <h2>About me</h2>
-          <p>
-            I am a Software Development Engineer with 1 year of professional experience at Enpass Technologies,
-            building and maintaining backend systems using Python and Django. My work focuses on designing
-            RESTful APIs, implementing complex business logic, managing subscription and licensing workflows,
-            and optimizing PostgreSQL databases for performance and scalability.
-          </p>
-          <p>
-            I work extensively with Django REST Framework, background task processing using Celery, and
-            production debugging to ensure reliability and data consistency across web, desktop, and mobile clients.
-            My experience includes schema design, ORM optimization, transaction handling, and analytics-driven insights
-            using SQL and monitoring dashboards.
-          </p>
-            <p>
-            Currently, I am expanding my skill set by exploring Artificial Intelligence and Machine Learning using Python,
-            I am passionate about building scalable systems, writing clean
-            maintainable code, and continuously improving as a backend engineer.
-            </p>
-          <a href="/static/images/Resume-Victor.pdf"><i class="far fa-file"></i>Resume</a>
-      </section>
-      <section class="footer">
-          <div class="socials">
-              Delete any you don't use
-              Icons from FontAwesome.com/icons
-              <a target="_blank" href="https://github.com/Victorjaglen">
-                  <i class="fab fa-github"></i>
-              </a>
-              <a target="_blank" href="https://www.linkedin.com/in/victor-jaglen-9b87501b5/">
-                  <i class="fab fa-linkedin"></i>
-              </a>
-              <a target="_blank" href="https://www.instagram.com/victorjaglen/">
-                  <i class="fab fa-instagram"></i>
-              </a>
-          </div>
-      </section>
-      <script src="" async defer></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-  </body>
-</html>
-{% endblock %} -->
-
 <!DOCTYPE html>
-
 <html>
-
 <head>
     <meta charset="utf-8">
     <title>Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <!-- ✅ FIXED PATH -->
+    <link rel="stylesheet" href="static/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <style>
+        /* ── About-page specific enhancements ── */
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
+        /* Hero overrides for about page */
+        .header {
+            padding: 4rem 1.5rem 5rem;
+            position: relative;
+        }
 
-<!-- ✅ FIXED PATH -->
-<link rel="stylesheet" href="static/styles.css">
+        .header h1 {
+            font-size: clamp(3rem, 12vw, 6rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1;
+            animation: fadeSlideDown 0.7s 0.1s ease both;
+        }
 
+        .header p {
+            animation: fadeSlideDown 0.7s 0.2s ease both;
+        }
 
+        .header img {
+            animation: fadeSlideDown 0.7s 0.3s ease both;
+        }
+
+        /* About page section */
+        #about-page {
+            background: linear-gradient(160deg, var(--secondary) 0%, #f9a84d 100%);
+            position: relative;
+            padding: clamp(3rem, 8vw, 5rem) clamp(1.5rem, 6vw, 5%);
+            text-align: left;
+            overflow: hidden;
+        }
+
+        #about-page::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 85% 15%, rgba(71,92,122,0.08) 0%, transparent 55%);
+            pointer-events: none;
+        }
+
+        #about-page #triangle7,
+        #about-page #triangle8 {
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 100px solid var(--secondary);
+            position: absolute;
+            top: -75px;
+        }
+
+        #about-page #triangle7 {
+            right: -50px;
+        }
+
+        #about-page #triangle8 {
+            right: 0px;
+        }
+
+        /* Content card wrapper */
+        .about-inner {
+            max-width: 760px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        #about-page h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 6vw, 3.2rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: var(--primary-dark);
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        #about-page h2.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Paragraph cards */
+        .about-para {
+            background: rgba(255,255,255,0.72);
+            border: 1px solid rgba(255,255,255,0.85);
+            border-radius: 16px;
+            padding: clamp(1.25rem, 4vw, 1.75rem) clamp(1.25rem, 4vw, 2rem);
+            margin-bottom: 1rem;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 24px rgba(71,92,122,0.09);
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.55s ease, transform 0.55s ease, box-shadow 0.25s ease;
+            position: relative;
+        }
+
+        .about-para.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .about-para:hover {
+            box-shadow: 0 8px 40px rgba(71,92,122,0.14);
+        }
+
+        .about-para:nth-child(2) { transition-delay: 0.1s; }
+        .about-para:nth-child(3) { transition-delay: 0.2s; }
+        .about-para:nth-child(4) { transition-delay: 0.3s; }
+
+        /* Decorative left accent line */
+        .about-para::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 1.25rem;
+            bottom: 1.25rem;
+            width: 3px;
+            background: linear-gradient(180deg, var(--accent), var(--secondary));
+            border-radius: 0 3px 3px 0;
+            opacity: 0.5;
+        }
+
+        #about-page p {
+            text-align: left;
+            margin-bottom: 0;
+            color: var(--primary-text);
+            font-size: clamp(0.95rem, 2vw, 1.05rem);
+            line-height: 1.8;
+        }
+
+        /* Resume button */
+        .resume-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background-color: var(--primary);
+            text-decoration: none;
+            color: var(--white);
+            border-radius: 10px;
+            font-family: 'Syne', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 12px 28px;
+            margin-top: 2rem;
+            box-shadow: 0 4px 18px rgba(71,92,122,0.25);
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.5s 0.35s ease, transform 0.5s 0.35s ease,
+                        background 0.2s, box-shadow 0.2s;
+        }
+
+        .resume-btn.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .resume-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 28px rgba(71,92,122,0.32);
+            color: var(--white);
+        }
+
+        .resume-btn i {
+            color: var(--white);
+            font-size: 1rem;
+        }
+
+        /* Stats row */
+        .about-stats {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .about-stats.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stat-chip {
+            background: rgba(255,255,255,0.8);
+            border: 1.5px solid rgba(255,255,255,0.9);
+            border-radius: 100px;
+            padding: 0.5rem 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 2px 10px rgba(71,92,122,0.08);
+        }
+
+        .stat-chip i {
+            color: var(--accent);
+            font-size: 0.85rem;
+        }
+
+        .stat-chip span {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--primary-dark);
+        }
+
+        @keyframes fadeSlideDown {
+            from { opacity: 0; transform: translateY(-18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (min-width: 992px) {
+            #about-page {
+                padding: 5% 15%;
+            }
+            .about-inner {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .resume-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            .about-stats {
+                gap: 0.6rem;
+            }
+            .stat-chip {
+                padding: 0.45rem 0.9rem;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
 <section class="navigation">
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html">Victor Jaglen</a>
-
-
-        <button class="toggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-            <i class="fas fa-bars"></i>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarContent">
-            <ul class="navbar-nav me-auto">
-
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">Home</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="about.html">About</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html#skills">Skills</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html#projects">Projects</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html#contact">Contact</a>
-                </li>
-
-            </ul>
+            <button class="toggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#skills">Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
-
-
+    </nav>
 </section>
 
 <!-- ✅ YOUR ORIGINAL CONTENT (UNCHANGED) -->
-
 <section class="header">
+    <div class="header-badge">Backend Engineer</div>
     <h1>Victor</h1>
     <p>Backend Engineer specializing in Django APIs, scalable systems, and exploring AI with Python</p>
     <img src="static/images/IMG_20200927_080359.jpg" alt="Headshot of myself">
+    <div class="header-scroll-hint"><i class="fas fa-chevron-down"></i></div>
 </section>
 
 <section id="about-page">
     <div id="triangle7"></div>
     <div id="triangle8"></div>
-    <h2>About me</h2>
 
+    <div class="about-inner">
+        <h2>About me</h2>
 
-<p>
-    I am a Software Development Engineer with 1 year of professional experience at Enpass Technologies,
-    building and maintaining backend systems using Python and Django. My work focuses on designing
-    RESTful APIs, implementing complex business logic, managing subscription and licensing workflows,
-    and optimizing PostgreSQL databases for performance and scalability.
-</p>
+        <!-- Quick-glance stats -->
+        <div class="about-stats">
+            <div class="stat-chip"><i class="fas fa-briefcase"></i><span>1 Year Experience</span></div>
+            <div class="stat-chip"><i class="fas fa-building"></i><span>Enpass Technologies</span></div>
+            <div class="stat-chip"><i class="fas fa-code"></i><span>Python · Django · PostgreSQL</span></div>
+        </div>
 
-<p>
-    I work extensively with Django REST Framework, background task processing using Celery, and
-    production debugging to ensure reliability and data consistency across web, desktop, and mobile clients.
-    My experience includes schema design, ORM optimization, transaction handling, and analytics-driven insights
-    using SQL and monitoring dashboards.
-</p>
+        <div class="about-para">
+            <p>
+                I am a Software Development Engineer with 1 year of professional experience at Enpass Technologies,
+                building and maintaining backend systems using Python and Django. My work focuses on designing
+                RESTful APIs, implementing complex business logic, managing subscription and licensing workflows,
+                and optimizing PostgreSQL databases for performance and scalability.
+            </p>
+        </div>
 
-<p>
-    Currently, I am expanding my skill set by exploring Artificial Intelligence and Machine Learning using Python,
-    I am passionate about building scalable systems, writing clean
-    maintainable code, and continuously improving as a backend engineer.
-</p>
+        <div class="about-para">
+            <p>
+                I work extensively with Django REST Framework, background task processing using Celery, and
+                production debugging to ensure reliability and data consistency across web, desktop, and mobile clients.
+                My experience includes schema design, ORM optimization, transaction handling, and analytics-driven insights
+                using SQL and monitoring dashboards.
+            </p>
+        </div>
 
-<!-- ✅ FIXED PATH -->
-<a href="static/images/Resume-Victor.pdf">
-    <i class="far fa-file"></i>Resume
-</a>
+        <div class="about-para">
+            <p>
+                Currently, I am expanding my skill set by exploring Artificial Intelligence and Machine Learning using Python,
+                I am passionate about building scalable systems, writing clean
+                maintainable code, and continuously improving as a backend engineer.
+            </p>
+        </div>
 
-
+        <!-- ✅ FIXED PATH -->
+        <a href="static/images/Resume-Victor.pdf" class="resume-btn">
+            <i class="far fa-file"></i>Resume
+        </a>
+    </div>
 </section>
 
 <section class="footer">
@@ -169,13 +353,20 @@
     </div>
 </section>
 
-
-<!-- <script src="" async defer></script> -->
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Scroll reveal -->
+<script>
+const revealTargets = document.querySelectorAll(
+    '#about-page h2, .about-para, .about-stats, .resume-btn'
+);
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+}, { threshold: 0.12 });
+revealTargets.forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
-
-
-
